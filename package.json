@@ -1,0 +1,15 @@
+{
+  "name": "rinhaw",
+  "version": "1.0.0",
+  "description": "serverzinho pra rinha 2023 test brincadeira haha",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Tontuu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
