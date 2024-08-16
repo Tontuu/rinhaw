@@ -37,14 +37,25 @@ const validation = function(req, res, next){
 
 router.post('/', validation, async (req, res, next) => {
   const id = uuidv4();
-  res.status(200).send("TODO: efetuar query no module db com os valores do id e do req.body");
+
+  req.body.id = id;
+  const result = await db.postPerson(req.body);
+
+  res.status(200).json( {"status": 200, "data": { "uuid": id, "name": req.body.nome }} );
 })
 
-router.get('/', (req, res) => {
+router.get('/:id', async (req, res) => {
+  const result = await db.searchPerson(req.params.id);
+
+  res.status(200).json({"status": 200, "data": result.rows[0]});
+})
+
+router.get('/', async (req, res) => {
   if (!req.query['t']) {
     res.status(400).end();
   }
-  res.send("TODO: search by term");
+  const result = await db.searchByTerm(req.query['t']);
+  res.status(200).json({"status": 200, "data": {"length": result.rows.length, "rows": result.rows}});
 })
 
 app.get('/contagem-pessoas', (_, res) => {
